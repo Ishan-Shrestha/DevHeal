@@ -1,6 +1,10 @@
 import subprocess
 
 # TESTING BRANCHES
+def test_code():
+    """Runs pytest and returns the subprocess result."""
+    res = subprocess.run(['pytest'], capture_output=True, text=True)
+    return res
 
 def parse_failure(stdout):
     """Parses the test results into individual parts and return the failures compiled as a list."""
@@ -22,11 +26,3 @@ def extract_failure_details(failures):
         failure_dict["reason"] = test_error[1].strip()
         failure_detail.append(failure_dict)
     return failure_detail
-
-res = subprocess.run(['pytest'], capture_output=True, text=True)
-if res.returncode == 0:
-    print("✅ All tests passed! No healing needed.")
-failures = parse_failure(res.stdout)
-fail_detail = extract_failure_details(failures)
-
-print(fail_detail)
