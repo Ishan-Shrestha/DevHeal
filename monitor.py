@@ -21,7 +21,7 @@ def extract_failure_details(failures):
         failure_detail.append(failure_dict)
     return failure_detail
 
-res = subprocess.run('pytest', capture_output=True, text=True)
+res = subprocess.run(['pytest'], capture_output=True, text=True)
 if res.returncode == 0:
     print("✅ All tests passed! No healing needed.")
 failures = parse_failure(res.stdout)
