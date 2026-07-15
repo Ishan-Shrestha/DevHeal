@@ -1,0 +1,7 @@
+/venv
+# Python bytecode cache
+__pycache__/
+*.pyc
+
+# Pytest execution cache
+.pytest_cache/
