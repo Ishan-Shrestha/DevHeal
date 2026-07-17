@@ -1,7 +1,7 @@
 import subprocess
 
 def read_source_file(filepath):
-    """Reads and returns the content of the given source file.m"""
+    """Reads and returns the content of the given source file."""
     try:
         with open(filepath, 'r') as f:
             content = f.read()

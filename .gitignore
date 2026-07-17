@@ -5,3 +5,5 @@ __pycache__/
 
 # Pytest execution cache
 .pytest_cache/
+
+.env
