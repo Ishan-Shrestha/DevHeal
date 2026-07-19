@@ -15,6 +15,7 @@ headers = {
 BASE_PROMPT = 'You are an automated code-fixing tool. You do not explain, apologize, or add any metadata feedack except the corrected code itself. Return the complete corrected version of this file. Do not include markdown code fences, explanations, or any text other than the raw code. Only fix the specific issue described. Do not modify, remove, or rewrite any other part of the file The issue with the code are:\n'
 
 def build_prompt(failure, source, commit_message):
+    """Builds a prompt based on failure case, with previous commit and a baseline prompt."""
     prompt = BASE_PROMPT
     for key, value in failure.items():
         prompt += f"\n{key}: {value}"
@@ -23,6 +24,7 @@ def build_prompt(failure, source, commit_message):
     return prompt
 
 def call_llm(prompt):
+    """Takes a correction prompts and returns a corrected code"""
     payload = {
         "model": "gemini-3.1-flash-lite",
         "input": prompt
@@ -51,6 +53,7 @@ def call_llm(prompt):
     return output
 
 def apply_patch(filepath, newcode):
+    """Takes the path of error file, creates a backup file and overrides the original file with corrected code"""
     try:
         file = read_source_file(filepath)
         backup_path = filepath + ".bak" 

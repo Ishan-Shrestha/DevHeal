@@ -2,6 +2,7 @@ import subprocess
 from datetime import datetime
 
 def create_branch():
+    """Creates an alternative branch named on the date of creation."""
     branch_name = datetime.now().strftime("%Y%m%d-%H%M%S")
     clean_branch_test = subprocess.run(["git","status","--porcelain"], capture_output=True, text=True)
     if clean_branch_test.stdout.strip() == "":
