@@ -12,7 +12,7 @@ headers = {
     "Content-Type": "application/json"
 }
 
-BASE_PROMPT = 'You are an automated code-fixing tool. You do not explain, apologize, or add any metadata feedack except the corrected code itself. Return the complete corrected version of this file. Do not include markdown code fences, explanations, or any text other than the raw code. The issue with the code are:\n'
+BASE_PROMPT = 'You are an automated code-fixing tool. You do not explain, apologize, or add any metadata feedack except the corrected code itself. Return the complete corrected version of this file. Do not include markdown code fences, explanations, or any text other than the raw code. Only fix the specific issue described. Do not modify, remove, or rewrite any other part of the file The issue with the code are:\n'
 
 def build_prompt(failure, source, commit_message):
     prompt = BASE_PROMPT
@@ -62,11 +62,3 @@ def apply_patch(filepath, newcode):
     except FileNotFoundError:
         print(f"Error: {filepath} not found")
         return None
-
-
-if __name__ == "__main__":
-    test_failure = {"file": "test_dummy.py", "test_name": "test_fail", "reason": "assert 1 == 2"}
-    test_source = "def test_fail():\n    assert 1==2\n"
-    prompt = build_prompt(test_failure, test_source, "test: trivial change on test-branch")
-    result = call_llm(prompt)
-    print(result)
