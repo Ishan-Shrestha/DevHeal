@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import requests
+from context import read_source_file
 
 load_dotenv()
 key = os.getenv("GEMINI_API_KEY")
@@ -48,6 +49,20 @@ def call_llm(prompt):
         return None
     
     return output
+
+def apply_patch(filepath, newcode):
+    try:
+        file = read_source_file(filepath)
+        backup_path = filepath + ".bak" 
+        with open(backup_path, 'w') as f:
+            f.write(file)
+        with open(filepath, 'w') as f:
+            f.write(newcode)
+        return True
+    except FileNotFoundError:
+        print(f"Error: {filepath} not found")
+        return None
+
 
 if __name__ == "__main__":
     test_failure = {"file": "test_dummy.py", "test_name": "test_fail", "reason": "assert 1 == 2"}
