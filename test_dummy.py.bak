@@ -2,7 +2,7 @@ def test_fail():
     assert 1 == 1
 
 def test_import_failure():
-    pass
+    raise ImportError("Simulated module failure")
 
 def calculate_area_rectangle(length, width):
     """Calculates the area of a rectangle."""
