@@ -9,8 +9,8 @@ def read_source_file(filepath):
     except FileNotFoundError:
         print(f"Error: {filepath} not found")
         return None
-
-def get_last_commit_message():
-    """Returns the last git commit message."""
-    res = subprocess.run(['git', 'log', '-3', '--pretty=%B'], capture_output=True, text=True)
+    
+def get_last_commit_message(filename):
+    """Returns the last git commit message that touched the given file."""
+    res = subprocess.run(['git', 'log', '-1', '--pretty=%B', '--', filename], capture_output=True, text=True)
     return res.stdout.strip()
