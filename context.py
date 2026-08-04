@@ -12,6 +12,5 @@ def read_source_file(filepath):
 
 def get_last_commit_message():
     """Returns the last git commit message."""
-    res = subprocess.run(['git','log','-1', '--pretty=%B'], capture_output=True, text=True)
-    commit_message = res.stdout.strip()
-    return commit_message
+    res = subprocess.run(['git', 'log', '-3', '--pretty=%B'], capture_output=True, text=True)
+    return res.stdout.strip()
