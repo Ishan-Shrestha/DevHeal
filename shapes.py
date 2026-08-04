@@ -10,4 +10,4 @@ def area_circle(radius):
 
 
 def area_triangle(base, height):
-    return base + height / 2
+    return base * height/2
